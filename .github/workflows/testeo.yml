@@ -1,0 +1,26 @@
+name: Ejecutar Tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: windows-2019  # Utilizamos Windows 2019 como sistema operativo
+
+    steps:
+    # se revisa el codigo, se configuara el ambiente, se instalan dependecnias si necesita y ejecuta  los test realizados con unittes 
+    - name: Checkout del código
+      uses: actions/checkout@v2
+
+    - name: Configurar ambiente de Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'  # Utilizamos Python 3.x
+
+    - name: Instalar dependencias
+      run: pip install -r requirements.txt  # Instalamos las dependencias necesarias, ajusta el nombre del archivo según corresponda
+
+    - name: Ejecutar tests
+      run: python -m unittest TestBack  # Ejecutamos los tests utilizando el comando 'python -m unittest '
